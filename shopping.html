@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping IMC VIVA BEM</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #1a1818;
+            color: #f7faf7;
+        }
+
+        .header {
+            background-color: rgb(235, 164, 11);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 4px solid #444241;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .produtos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .produto-card {
+            background-color: rgb(235, 164, 11);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            aspect-ratio: 2/3;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .produto-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .produto-imagem {
+            width: 100%;
+            height: 66.67%;
+            object-fit: cover;
+        }
+
+        .produto-info {
+            padding: 1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .produto-titulo {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #0b290b;
+        }
+
+        .produto-descricao {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: #102710;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-clamp: 3;
+        }
+
+        .btn-comprar {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .btn-comprar:hover {
+            background-color: #45a049;
+        }
+
+        .voltar-btn {
+            display: inline-block;
+            background-color: #666;
+            color: white;
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* Estilos para as abas */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background-color: #666;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, rgba(255,255,255,0.8));
+            animation: rotateBorder 4s linear infinite;
+        }
+
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            background: inherit;
+            border-radius: 25px;
+            z-index: 1;
+        }
+
+        @keyframes rotateBorder {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        .tab-button.active {
+            background-color: #4CAF50;
+        }
+
+        /* Ajuste para o texto ficar visível sobre a animação */
+        .tab-button span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+    </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-22MQBM4RBV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-22MQBM4RBV');
+</script>
+
+<body>
+    <div class="header">
+        <h1>Shopping IMC VIVA BEM</h1>
+        <p>Produtos selecionados para sua saúde e bem-estar</p>
+        <p>Selecionamos os melhores produtos, dos melhores fornecedores, para você.</p>
+        <p>Você terá a garantia de entrega de grandes sites de compras, como Mercado Livre, Amazon, etc.</p>
+        <a href="index.html" class="voltar-btn">Voltar para Calculadora</a>
+    </div>
+
+    <div class="container">
+        <!-- Sistema de abas -->
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('cabelo')"><span>CABELO</span></button>
+            <button class="tab-button" onclick="openTab('rosto')"><span>ROSTO</span></button>
+            <button class="tab-button" onclick="openTab('corpo')"><span>CORPO</span></button>
+        </div>
+
+        <!-- Conteúdo das abas -->
+        <div id="cabelo" class="tab-content active">
+            <!-- Produtos para Cabelo -->
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_715918-MLU72576430636_112023-F.webp" class="produto-imagem">
+                <div class="produto-info">
+                    <p class="produto-titulo">Spray Multifuncional Hidratação de 250mL</p>
+                    <p class="produto-descricao">Este produto é feito com elementos naturais de origem vegetal para cuidar do seu cabelo.</p>
+                    <a href="https://mercadolivre.com/sec/1RK7YGS" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_948614-MLU72761408752_112023-F.webp" class="produto-imagem">
+                <div class="produto-info">
+                    <p class="produto-titulo">Surya Brasil Henna Creme - Castanho Claro</p>
+                    <p class="produto-descricao">Cobre os fios brancos e dura até 12 lavagens.</p>
+                    <a href="https://mercadolivre.com/sec/2PMAJTq" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- ROSTO -->
+        <div id="rosto" class="tab-content">
+            <!-- Produtos para Rosto -->
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_987901-MLA81597533137_122024-F.webp" class="produto-imagem" style="width: 100%">
+                <div class="produto-info">
+                    <p class="produto-titulo">Sérum antirugas</p>
+                    <p class="produto-descricao">Para pele sensível. É hipoalergênico.</p>
+                    <a href="https://mercadolivre.com/sec/1Hioesp" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+            
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_823190-MLU72675208380_112023-F.webp" class="produto-imagem">
+                <div class="produto-info">
+                    <p class="produto-titulo">Creme Multirreparador Cicaplast</p>
+                    <p class="produto-descricao">Creme hidratante com aplicação de dia/noite.</p>
+                    <a href="https://mercadolivre.com/sec/19ZQR4J" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_797471-MLA81444740957_122024-F.webp" class="produto-imagem">
+                <div class="produto-info">
+                    <p class="produto-titulo">Gel De Limpeza Purificante Facial.</p>
+                    <p class="produto-descricao">Para pessoas com mais de 13 anos.</p>
+                    <a href="https://mercadolivre.com/sec/2D7jAYu" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_634671-MLB81363818282_122024-O.webp" class="produto-imagem">
+                <div class="produto-info">
+                    <p class="produto-titulo">Sabonete Gel Facial Peles Oleosas.</p>
+                    <p class="produto-descricao">Não contém ingredientes de origem animal.</p>
+                    <a href="https://mercadolivre.com/sec/1zpmGev" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_731336-MLU78557698231_082024-F.webp" class="produto-imagem" style="width: 100%">
+                <div class="produto-info">
+                    <p class="produto-titulo">Sérum Principia,Todos os tipos de pele</p>
+                    <p class="produto-descricao">Sérum clareador, dia/noite.</p>
+                    <a href="https://mercadolivre.com/sec/1YnwYSS" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CORPO -->
+        <div id="corpo" class="tab-content">
+            <!-- Produtos para Corpo -->
+            <div class="produto-card">
+                <img src="https://http2.mlstatic.com/D_NQ_NP_2X_701157-MLU73980603914_012024-F.webp" class="produto-imagem">
+                <div class="produto-info">
+                    <p class="produto-titulo">Balança Digital Inteligente</p>
+                    <p class="produto-descricao">Balança de bioimpedância que mede peso, gordura corporal, entre outros indicadores.</p>
+                    <a href="https://mercadolivre.com/sec/1uuLHwe" class="btn-comprar" target="_blank">Saiba Mais/Comprar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // Esconde todas as abas
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let content of tabContents) {
+                content.classList.remove('active');
+            }
+            
+            // Remove a classe active de todos os botões
+            const tabButtons = document.getElementsByClassName('tab-button');
+            for (let button of tabButtons) {
+                button.classList.remove('active');
+            }
+            
+            // Mostra a aba selecionada
+            document.getElementById(tabName).classList.add('active');
+            
+            // Ativa o botão clicado
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html> 
